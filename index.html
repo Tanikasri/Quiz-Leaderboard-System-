@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRM Quiz Task | Leaderboard System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">ELITE LOGIC PRO</div>
+            <div class="health-indicator">
+                <div class="pulse-dot"></div>
+                <span id="health-text">System Normal</span>
+            </div>
+            <div class="badge">Quiz Task Engine v1.0</div>
+        </header>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">System Status</div>
+                <div class="stat-value" id="sys-status">Standby</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Grand Total Score</div>
+                <div class="stat-value" id="grand-total">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Deduplicated Events</div>
+                <div class="stat-value" id="event-count">0</div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Controls & Terminal -->
+            <div class="column">
+                <div class="card">
+                    <h2><i class="fas fa-satellite-dish"></i> Validator Control</h2>
+                    <div class="polling-controls">
+                        <div class="input-group">
+                            <label for="regNo">Registration Number</label>
+                            <input type="text" id="regNo" value="2024CS101" placeholder="e.g. 2024CS101">
+                        </div>
+                        <button id="start-btn">Initialize Poll Engine</button>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="poll-steps" id="poll-steps-1">
+                            <div class="step" data-index="0"></div>
+                            <div class="step" data-index="1"></div>
+                            <div class="step" data-index="2"></div>
+                            <div class="step" data-index="3"></div>
+                            <div class="step" data-index="4"></div>
+                        </div>
+                        <div class="poll-steps" id="poll-steps-2">
+                            <div class="step" data-index="5"></div>
+                            <div class="step" data-index="6"></div>
+                            <div class="step" data-index="7"></div>
+                            <div class="step" data-index="8"></div>
+                            <div class="step" data-index="9"></div>
+                        </div>
+                    </div>
+
+                    <div class="terminal" id="terminal-out">
+                        <div class="log-entry info">System ready. Waiting for initialization...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Final Leaderboard -->
+            <div class="column">
+                <div class="card">
+                    <h2><i class="fas fa-trophy"></i> Live Leaderboard</h2>
+                    <div style="max-height: 500px; overflow-y: auto;">
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Participant</th>
+                                    <th>Total Score</th>
+                                    <th>Status / Dist</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-body">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="analytics-grid">
+                        <div class="mini-stat">
+                            <div class="mini-stat-label">Efficiency Ratio</div>
+                            <div class="mini-stat-value" id="efficiency-val">0%</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-label">Unique/Total</div>
+                            <div class="mini-stat-value" id="density-val">0/0</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-top: 24px;">
+                        <button id="submit-btn" disabled style="flex: 2; margin-top: 0; background: var(--accent);">Finalize & Submit Result</button>
+                        <button id="export-btn" class="export-btn" style="flex: 1;">JSON Export</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final result modal -->
+    <div class="final-screen" id="final-modal">
+        <div class="card" style="max-width: 500px; text-align: center;">
+            <i class="fas fa-check-circle" style="font-size: 64px; color: #62d196; margin-bottom: 20px;"></i>
+            <h1 style="font-size: 32px; margin-bottom: 12px;">Submission Successful</h1>
+            <p id="final-msg" style="color: var(--text-secondary); margin-bottom: 30px;">Result has been successfully validated by the SRM system.</p>
+            <div class="stats-row" style="grid-template-columns: 1fr 1fr; margin-top: 20px;">
+                <div class="stat-card" style="background: rgba(255,255,255,0.05);">
+                    <div class="stat-label">Expected</div>
+                    <div class="stat-value" id="modal-expected">0</div>
+                </div>
+                <div class="stat-card" style="background: rgba(255,255,255,0.05);">
+                    <div class="stat-label">Submitted</div>
+                    <div class="stat-value" id="modal-submitted">0</div>
+                </div>
+            </div>
+            <button onclick="location.reload()" style="margin-top: 30px; width: 100%;">Run New Cycle</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
